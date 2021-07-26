@@ -4,9 +4,69 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pengolahan Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href=input2.php>
+
 </head>
 <body>
-    <p> Raka </p>
+    <h1> Pengolahan Data</h1>
+    <p> Beban Pencemar Eksisting</p>
+
+    <!-- input data beban pencemar eksisting -->
+    <form action="" method="post">
+    <div class="input-group">
+      <label class="input-group-text" for="inputGroupSelect01">Titik Pantau</label>
+      <select class="form-select" id="inputGroupSelect01">
+        <option selected>Choose...</option>
+        <option value="1">Sungai Cimahi Hulu</option>
+        <option value="2">Sungai Cimahi Tengah</option>
+        <option value="3">Sungai Cimahi Hilir</option>
+      </select>
+    </div><br>
+
+    <div class="input-group">
+      <label class="input-group-text" for="inputGroupSelect01">Tahun</label>
+      <select class="form-select" id="inputGroupSelect01">
+        <option selected>Choose...</option>
+        <option value="1">2020</option>
+        <option value="2">2020</option>
+        <option value="3">2019</option>
+      </select>
+    </div><br>
+
+    Waktu Sampling :<br>
+    <input type="date" name="waktu_sampling" value="<?=date('Y-m-d')?>" class="form-control" required><br>
+
+    <div class="input-data">
+        <label for="Form1" 
+        class="form-label">Debit air </label>
+        <input type="number" class="form-control" name="debit_air" placeholder="e.g = 1000 m3/s">
+      </div>
+
+      <div class="input-data">
+        <label for="Form1" 
+        class="form-label">Konsentrasi Biological Oxygen Demand</label>
+        <input type="number" class="form-control" name="konsentrasi_bod" placeholder="e.g = 1000 mg/L">
+      </div>
+
+      <br>
+      <input type="submit" value="Input" name="proses"/>
+
+      <div class="output-data">
+        <label for="Form1" class="form-output">Beban Pencemar</label>
+        <textarea class="form-control" id="output1" rows="3"></textarea>
+      </div>
+
+      <script>
+        var bebanPencemar ;
+        bebanPencemar = document.getElementById("input1").innerHTML + document.getElementById("input2").innerHTML = bebanPencemar;
+      </script>
+      </form>
+
+      <br>
+      <div class="button"> ini button <iframe src="https://www.google.com/maps/d/embed?mid=14ilnJM5O0lFnf0fI0tN6hrlcVPisDp_l" width="1640" height="480"></iframe></div>
+
+
 </body>
 </html>
