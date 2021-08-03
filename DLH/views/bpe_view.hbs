@@ -1,0 +1,215 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Beban Pencemar Eksisting</title>
+    <link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+</head>    
+<body>
+    <divclass ="container">
+        <h2>Beban Pencemar Eksisting</h2>
+        <button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Tambah Data</button>
+        <table class="table table-striped" id="mytable">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Sungai</th>
+                    <th>Titik Pantau</th>
+                    <th>Periode Pemantauan</th>
+                    <th>Koordinat</th>
+                    <th>Waktu Sampling</th>
+                    <th>BOD (mg/L)</th>
+                    <th>Debit (m3/s)</th>
+                    <th>Beban Pencemar (Kg/hari)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each results}}
+                <tr>
+                    <td>{{ id_bpe }}</td>
+                    <td>{{ nama_sungai }}</td>
+                    <td>{{ titik_pantau }}</td>
+                    <td>{{ periode_pemantauan }}</td>
+                    <td>{{ koordinat }}</td>
+                    <td>{{ waktu_sampling }}</td>
+                    <td>{{ konsentrasi_bod }}</td>
+                    <td>{{ debit_air }}</td>
+                    <td>{{ beban_pencemar }}</td>
+                    <td>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-info edit" data-id="{{ id_bpe }}" data-nama_sungai="{{ nama_sungai }}" data-titik_pantau="{{ titik_pantau }}" data-periode_pemantauan="{{ periode_pemantauan }}" data-koordinat="{{ koordinat }}" data-waktu_sampling="{{ waktu_sampling }}" data-konsentrasi_bod="{{ konsentrasi_bod }}" data-debit_air="{{ debit_air }}" data-beban_pencemar="{{ beban_pencemar }}">Edit</a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger delete" data-id="{{ id_bpe }}">Delete</a>
+                    </td>   
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- Add New Product Modal-->
+	  <form action="/save" method="post">
+        <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+             <div class="modal-body">
+               <div class="form-group">
+                   <input type="text" name="nama_sungai" class="form-control" placeholder="Nama Sungai" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="titik_pantau" class="form-control" placeholder="Titik Pantau" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="periode_pemantauan" class="form-control" placeholder="Periode Pemantauan" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="koordinat" class="form-control" placeholder="Koordinat" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="waktu_sampling" class="form-control" placeholder="Waktu Sampling" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="konsentrasi_bod" class="form-control" placeholder="Konsentrasi BOD" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="debit_air" class="form-control" placeholder="Debit Air" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="beban_pencemar" class="form-control" placeholder="Beban Pencemar" required>
+               </div>
+
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="submit" class="btn btn-primary">Save</button>
+             </div>
+           </div>
+         </div>
+        </div>
+	 </form>
+
+	 <!-- Edit Product Modal-->
+   <form action="/update" method="post">
+       <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                   <input type="text" name="nama_sungai" class="form-control" placeholder="Nama Sungai" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="titik_pantau" class="form-control" placeholder="Titik Pantau" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="periode_pemantauan" class="form-control" placeholder="Periode Pemantauan" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="koordinat" class="form-control" placeholder="Koordinat" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="waktu_sampling" class="form-control" placeholder="Waktu Sampling" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="konsentrasi_bod" class="form-control" placeholder="Konsentrasi BOD" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="debit_air" class="form-control" placeholder="Debit Air" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="beban_pencemar" class="form-control" placeholder="Beban Pencemar" required>
+               </div>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" name="id" class="id_bpe">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </div>
+        </div>
+       </div>
+  </form>
+
+	 <!-- Delete Product Modal-->
+ 	  <form id="add-row-form" action="/delete" method="post">
+ 	     <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ 	        <div class="modal-dialog">
+ 	           <div class="modal-content">
+ 	               <div class="modal-header">
+									 	<h5 class="modal-title" id="myModalLabel">Hapus Data</h5>
+ 	                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+ 	               </div>
+ 	               <div class="modal-body">
+												 <strong>Are You Sure To Delete This Data?</strong>
+ 	               </div>
+ 	               <div class="modal-footer">
+									 		<input type="hidden" name="id_bpe" class="form-control id_bpe2" required>
+ 	                   	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+ 	                  	<button type="submit" class="btn btn-success">Delete</button>
+ 	               </div>
+ 	      			</div>
+ 	        </div>
+ 	     </div>
+ 	 </form>
+
+<script src="/assets/js/jquery-3.3.1.js"></script>
+<script src="/assets/js/bootstrap.js"></script>    
+<script>
+   $(document).ready(function(){
+       //tampilkan data ke modal untuk edit
+       $('#mytable').on('click','.edit',function(){
+           var id_bpe = $(this).data('id');
+           var nama_sungai = $(this).data('nama_sungai');
+           var titik_pantau = $(this).data('titik_pantau');
+           var periode_pemantauan = $(this).data('periode_pemantauan');
+           var koordinat = $(this).data('koordinat');
+           var waktu_sampling = $(this).data('waktu_sampling');
+           var konsentrasi_bod = $(this).data('konsentrasi_bod');
+           var debit_air = $(this).data('debit_air');
+           var beban_pencemar = $(this).data('beban_pencemar');
+           $('#EditModal').modal('show');
+           $('.id').val(id_bpe);
+           $('.nama_sungai').val(nama_sungai);
+           $('.titik_pantau').val(titik_pantau);
+           $('.periode_pemantauan').val(periode_pemantauan);
+           $('.koordinat').val(koordinat);
+           $('.waktu_sampling').val(waktu_sampling);
+           $('.konsentrasi_bod').val(konsentrasi_bod);
+           $('.debit_air').val(debit_air);
+           $('.beban_pencemar').val(beban_pencemar);
+        });
+
+        //tampilkan modal hapus record
+        $('#mytable').on('click','.delete',function(){
+            var id_bpe = $(this).data('id');
+            $('#DeleteModal').modal('show');
+            $('.id_bpe2').val(id_bpe);
+        });
+    });
+</script>
+</body>
+</html>
