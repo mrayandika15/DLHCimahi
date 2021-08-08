@@ -56,7 +56,7 @@ app.post('/save',(req, res) => {
 
 //route untuk update data
 app.post('/update',(req, res) => {
-  let sql = "UPDATE input_bpe SET nama_sungai='"+req.body.nama_sungai+"', titik_pantau='"+req.body.titik_pantau+"',periode_pemantauan='"+req.body.periode_pemantauan+"', koordinat='"+req.body.koordinat+"', waktu_sampling='"+req.body.waktu_sampling+"', konsentrasi_bod='"+req.body.konsentrasi_bod+"', debit_air='"+req.body.debit_air+"', beban_pencemar='"+req.body.beban_pencemar+"' WHERE id_bpe="+req.body.id+"";
+  let sql = "UPDATE input_bpe SET nama_sungai='"+req.body.nama_sungai+"', titik_pantau='"+req.body.titik_pantau+"', periode_pemantauan='"+req.body.periode_pemantauan+"', koordinat='"+req.body.koordinat+"', waktu_sampling='"+req.body.waktu_sampling+"', konsentrasi_bod='"+req.body.konsentrasi_bod+"', debit_air='"+req.body.debit_air+"', beban_pencemar='"+req.body.beban_pencemar+"' WHERE id_bpe="+req.body.id;
   let query = conn.query(sql, (err, results) => {
     if(err) throw err;
     res.redirect('/');

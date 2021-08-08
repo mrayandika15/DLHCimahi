@@ -1,0 +1,64 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="btn btn-outline-primary btn-sm"
+        data-toggle="modal"
+        data-target="#add-modal"> Add
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Kode Sungai</th>
+              <th>Nama Sungai</th>
+              <th>Wilayah Sungai</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let i = 0; i < sungai.length; i++){ %>
+              <tr>
+                <td><%= i +1 %></td>
+                <td><%= sungai[i].kodeSungai %></td>
+                <td><%= sungai[i].namaSungai %></td>
+                <td><%= sungai[i].wilSungai %></td>
+                <td class="text-center">
+                  <form
+                    action="/sungai/<%= sungai[i].id %>?_method=DELETE"
+                    method="POST"
+                  >
+                    <a
+                      href="javascript:void()"
+                      class="btn btn-outline-warning btn-sm button-update"
+                      data-id="<%= sungai[i].id %>"
+                      data-kodeSungai="<%= sungai[i].kodeSungai %>"
+                      data-namaSungai="<%= sungai[i].namaSungai %>"
+                      data-wilSungai="<%= sungai[i].wilSungai %>"
+                      >Edit</a
+                    >
+                    <button
+                      type="submit"
+                      class="btn btn-outline-danger btn-sm"
+                      onclick="return confirm('Apa anda yakin ingin menghapus data ini?');"
+                    >
+                      Delete
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
