@@ -1,0 +1,1622 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/Batas_DAS_3.js"></script>
+        <script src="data/Perairan_AR_4.js"></script>
+        <script src="data/Perairan_LN_5.js"></script>
+        <script src="data/Kontur_6.js"></script>
+        <script src="data/Penggunaan_lahan_7.js"></script>
+        <script src="data/Batas_AdministrasiDesa_8.js"></script>
+        <script src="data/Batas_AdministrasiKec_9.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        map.createPane('pane_GoogleStreet_0');
+        map.getPane('pane_GoogleStreet_0').style.zIndex = 400;
+        var layer_GoogleStreet_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleStreet_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleStreet_0;
+        map.addLayer(layer_GoogleStreet_0);
+        map.createPane('pane_GoogleSatelite_1');
+        map.getPane('pane_GoogleSatelite_1').style.zIndex = 401;
+        var layer_GoogleSatelite_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatelite_1',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleSatelite_1;
+        map.addLayer(layer_GoogleSatelite_1);
+        map.createPane('pane_OpenStreetMap_2');
+        map.getPane('pane_OpenStreetMap_2').style.zIndex = 402;
+        var layer_OpenStreetMap_2 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OpenStreetMap_2',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OpenStreetMap_2;
+        map.addLayer(layer_OpenStreetMap_2);
+        function pop_Batas_DAS_3(feature, layer) {
+        }
+
+        function style_Batas_DAS_3_0(feature) {
+            switch(String(feature.properties['NAMA_OBJEK'])) {
+                case 'Das Cibeureum':
+                    return {
+                pane: 'pane_Batas_DAS_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(201,121,158,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Das Cibiuk':
+                    return {
+                pane: 'pane_Batas_DAS_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,68,211,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Das Cihaur':
+                    return {
+                pane: 'pane_Batas_DAS_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(238,151,59,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Das Cilember':
+                    return {
+                pane: 'pane_Batas_DAS_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(148,203,97,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Das Cimahi':
+                    return {
+                pane: 'pane_Batas_DAS_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(45,217,137,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Batas_DAS_3');
+        map.getPane('pane_Batas_DAS_3').style.zIndex = 403;
+        map.getPane('pane_Batas_DAS_3').style['mix-blend-mode'] = 'normal';
+        var layer_Batas_DAS_3 = new L.geoJson(json_Batas_DAS_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Batas_DAS_3',
+            layerName: 'layer_Batas_DAS_3',
+            pane: 'pane_Batas_DAS_3',
+            onEachFeature: pop_Batas_DAS_3,
+            style: style_Batas_DAS_3_0,
+        });
+        bounds_group.addLayer(layer_Batas_DAS_3);
+        map.addLayer(layer_Batas_DAS_3);
+        function pop_Perairan_AR_4(feature, layer) {
+        }
+
+        function style_Perairan_AR_4_0(feature) {
+            switch(String(feature.properties['JENIS_DINA'])) {
+                case 'Danau':
+                    return {
+                pane: 'pane_Perairan_AR_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,144,51,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kolam':
+                    return {
+                pane: 'pane_Perairan_AR_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(105,110,238,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pekarangan':
+                    return {
+                pane: 'pane_Perairan_AR_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(186,222,131,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perkebunan':
+                    return {
+                pane: 'pane_Perairan_AR_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(197,39,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sungai':
+                    return {
+                pane: 'pane_Perairan_AR_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(203,108,140,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tegalan/Ladang':
+                    return {
+                pane: 'pane_Perairan_AR_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(87,226,122,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Perairan_AR_4');
+        map.getPane('pane_Perairan_AR_4').style.zIndex = 404;
+        map.getPane('pane_Perairan_AR_4').style['mix-blend-mode'] = 'normal';
+        var layer_Perairan_AR_4 = new L.geoJson(json_Perairan_AR_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Perairan_AR_4',
+            layerName: 'layer_Perairan_AR_4',
+            pane: 'pane_Perairan_AR_4',
+            onEachFeature: pop_Perairan_AR_4,
+            style: style_Perairan_AR_4_0,
+        });
+        bounds_group.addLayer(layer_Perairan_AR_4);
+        map.addLayer(layer_Perairan_AR_4);
+        function pop_Perairan_LN_5(feature, layer) {
+        }
+
+        function style_Perairan_LN_5_0(feature) {
+            switch(String(feature.properties['NAMA'])) {
+                case 'Bongkok':
+                    return {
+                pane: 'pane_Perairan_LN_5',
+                opacity: 1,
+                color: 'rgba(149,239,141,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Ci Baligo':
+                    return {
+                pane: 'pane_Perairan_LN_5',
+                opacity: 1,
+                color: 'rgba(39,207,179,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Ci Bongkok':
+                    return {
+                pane: 'pane_Perairan_LN_5',
+                opacity: 1,
+                color: 'rgba(221,63,126,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Ci Gede':
+                    return {
+                pane: 'pane_Perairan_LN_5',
+                opacity: 1,
+                color: 'rgba(73,103,204,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Ci Kendal':
+                    return {
+                pane: 'pane_Perairan_LN_5',
+                opacity: 1,
+                color: 'rgba(234,74,213,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Ci Lisung':
+                    return {
+                pane: 'pane_Perairan_LN_5',
+                opacity: 1,
+                color: 'rgba(213,80,71,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Ci Mahi':
+                    return {
+                pane: 'pane_Perairan_LN_5',
+                opacity: 1,
+                color: 'rgba(225,225,35,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Ci Mancong':
+                    return {
+                pane: 'pane_Perairan_LN_5',
+                opacity: 1,
+                color: 'rgba(96,189,228,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Ci Panas':
+                    return {
+                pane: 'pane_Perairan_LN_5',
+                opacity: 1,
+                color: 'rgba(165,52,217,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Ci Sangkan':
+                    return {
+                pane: 'pane_Perairan_LN_5',
+                opacity: 1,
+                color: 'rgba(221,181,134,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Kali Wongso':
+                    return {
+                pane: 'pane_Perairan_LN_5',
+                opacity: 1,
+                color: 'rgba(121,201,152,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Sungai Muara':
+                    return {
+                pane: 'pane_Perairan_LN_5',
+                opacity: 1,
+                color: 'rgba(179,232,117,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Perairan_LN_5');
+        map.getPane('pane_Perairan_LN_5').style.zIndex = 405;
+        map.getPane('pane_Perairan_LN_5').style['mix-blend-mode'] = 'normal';
+        var layer_Perairan_LN_5 = new L.geoJson(json_Perairan_LN_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Perairan_LN_5',
+            layerName: 'layer_Perairan_LN_5',
+            pane: 'pane_Perairan_LN_5',
+            onEachFeature: pop_Perairan_LN_5,
+            style: style_Perairan_LN_5_0,
+        });
+        bounds_group.addLayer(layer_Perairan_LN_5);
+        map.addLayer(layer_Perairan_LN_5);
+        function pop_Kontur_6(feature, layer) {
+        }
+
+        function style_Kontur_6_0(feature) {
+            switch(String(feature.properties['KETINGGIAN'])) {
+                case '1000 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(0,0,4,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '1010 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(2,2,14,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '1020 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(7,5,27,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '1030 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(13,10,41,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '1040 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(20,14,55,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '1050 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(28,16,70,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '1060 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(38,17,86,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '1070 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(48,17,100,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '1080 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(59,15,111,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '690 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(70,15,119,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '700 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(80,18,123,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '710 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(90,22,126,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '720 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(100,26,128,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '730 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(111,29,129,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '740 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(120,33,130,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '750 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(130,37,129,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '760 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(140,41,129,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '770 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(150,44,128,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '780 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(161,48,126,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '790 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(172,51,125,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '800 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(182,54,121,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '810 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(192,58,118,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '820 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(203,62,114,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '830 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(213,67,110,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '840 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(222,73,105,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '850 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(231,81,99,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '860 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(237,89,95,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '870 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(243,100,92,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '880 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(247,111,92,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '890 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(249,123,93,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '900 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(252,135,97,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '910 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(253,147,103,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '920 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(254,159,109,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '930 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(254,171,116,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '940 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(254,183,125,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '950 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(254,195,135,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '960 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(254,206,145,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '970 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(254,218,156,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '980 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(253,230,167,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '990 m':
+                    return {
+                pane: 'pane_Kontur_6',
+                opacity: 1,
+                color: 'rgba(253,242,179,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Kontur_6');
+        map.getPane('pane_Kontur_6').style.zIndex = 406;
+        map.getPane('pane_Kontur_6').style['mix-blend-mode'] = 'normal';
+        var layer_Kontur_6 = new L.geoJson(json_Kontur_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Kontur_6',
+            layerName: 'layer_Kontur_6',
+            pane: 'pane_Kontur_6',
+            onEachFeature: pop_Kontur_6,
+            style: style_Kontur_6_0,
+        });
+        bounds_group.addLayer(layer_Kontur_6);
+        map.addLayer(layer_Kontur_6);
+        function pop_Penggunaan_lahan_7(feature, layer) {
+        }
+
+        function style_Penggunaan_lahan_7_0(feature) {
+            switch(String(feature.properties['GUNA_LAHAN'])) {
+                case 'Jalan Arteri Primer':
+                    return {
+                pane: 'pane_Penggunaan_lahan_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,234,92,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Jalan Tol':
+                    return {
+                pane: 'pane_Penggunaan_lahan_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,43,43,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kolam':
+                    return {
+                pane: 'pane_Penggunaan_lahan_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,152,64,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan':
+                    return {
+                pane: 'pane_Penggunaan_lahan_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,18,219,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perkebunan/Kebun':
+                    return {
+                pane: 'pane_Penggunaan_lahan_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(18,122,225,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Permukiman dan Tempat Kegiatan':
+                    return {
+                pane: 'pane_Penggunaan_lahan_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(27,27,239,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sawah':
+                    return {
+                pane: 'pane_Penggunaan_lahan_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(111,202,203,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Semak Belukar':
+                    return {
+                pane: 'pane_Penggunaan_lahan_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(216,18,117,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Situ':
+                    return {
+                pane: 'pane_Penggunaan_lahan_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(106,235,173,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tanah Kosong/Gundul':
+                    return {
+                pane: 'pane_Penggunaan_lahan_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,223,46,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tegalan/Ladang':
+                    return {
+                pane: 'pane_Penggunaan_lahan_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,216,15,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Penggunaan_lahan_7');
+        map.getPane('pane_Penggunaan_lahan_7').style.zIndex = 407;
+        map.getPane('pane_Penggunaan_lahan_7').style['mix-blend-mode'] = 'normal';
+        var layer_Penggunaan_lahan_7 = new L.geoJson(json_Penggunaan_lahan_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Penggunaan_lahan_7',
+            layerName: 'layer_Penggunaan_lahan_7',
+            pane: 'pane_Penggunaan_lahan_7',
+            onEachFeature: pop_Penggunaan_lahan_7,
+            style: style_Penggunaan_lahan_7_0,
+        });
+        bounds_group.addLayer(layer_Penggunaan_lahan_7);
+        map.addLayer(layer_Penggunaan_lahan_7);
+        function pop_Batas_AdministrasiDesa_8(feature, layer) {
+        }
+
+        function style_Batas_AdministrasiDesa_8_0(feature) {
+            switch(String(feature.properties['DESA'])) {
+                case 'Kelurahan Baros':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(76,119,217,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kelurahan Cibabat':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,226,51,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kelurahan Cibeber':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(156,203,103,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kelurahan Cibeureum':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(82,71,203,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kelurahan Cigugur Tengah':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,207,238,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kelurahan Cimahi':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,62,66,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kelurahan Cipageran':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(148,223,133,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kelurahan Citeureup':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(233,112,51,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kelurahan Karang Mekar':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(22,234,68,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kelurahan Leuwigajah':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(208,66,233,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kelurahan Melong':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(158,95,230,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kelurahan Padasuka':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,20,104,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kelurahan Pasir Kaliki':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,111,206,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kelurahan Setiamanah':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(108,218,173,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kelurahan Utama':
+                    return {
+                pane: 'pane_Batas_AdministrasiDesa_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(110,230,224,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Batas_AdministrasiDesa_8');
+        map.getPane('pane_Batas_AdministrasiDesa_8').style.zIndex = 408;
+        map.getPane('pane_Batas_AdministrasiDesa_8').style['mix-blend-mode'] = 'normal';
+        var layer_Batas_AdministrasiDesa_8 = new L.geoJson(json_Batas_AdministrasiDesa_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Batas_AdministrasiDesa_8',
+            layerName: 'layer_Batas_AdministrasiDesa_8',
+            pane: 'pane_Batas_AdministrasiDesa_8',
+            onEachFeature: pop_Batas_AdministrasiDesa_8,
+            style: style_Batas_AdministrasiDesa_8_0,
+        });
+        bounds_group.addLayer(layer_Batas_AdministrasiDesa_8);
+        map.addLayer(layer_Batas_AdministrasiDesa_8);
+        function pop_Batas_AdministrasiKec_9(feature, layer) {
+        }
+
+        function style_Batas_AdministrasiKec_9_0(feature) {
+            switch(String(feature.properties['KECAMATAN'])) {
+                case 'Cimahi Selatan':
+                    return {
+                pane: 'pane_Batas_AdministrasiKec_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,137,1,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Cimahi Tengah':
+                    return {
+                pane: 'pane_Batas_AdministrasiKec_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,243,1,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Cimahi Utara':
+                    return {
+                pane: 'pane_Batas_AdministrasiKec_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(64,222,55,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Batas_AdministrasiKec_9');
+        map.getPane('pane_Batas_AdministrasiKec_9').style.zIndex = 409;
+        map.getPane('pane_Batas_AdministrasiKec_9').style['mix-blend-mode'] = 'normal';
+        var layer_Batas_AdministrasiKec_9 = new L.geoJson(json_Batas_AdministrasiKec_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Batas_AdministrasiKec_9',
+            layerName: 'layer_Batas_AdministrasiKec_9',
+            pane: 'pane_Batas_AdministrasiKec_9',
+            onEachFeature: pop_Batas_AdministrasiKec_9,
+            style: style_Batas_AdministrasiKec_9_0,
+        });
+        bounds_group.addLayer(layer_Batas_AdministrasiKec_9);
+        map.addLayer(layer_Batas_AdministrasiKec_9);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Batas_AdministrasiKec<br /><table><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiKec_9_CimahiSelatan0.png" /></td><td>Cimahi Selatan</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiKec_9_CimahiTengah1.png" /></td><td>Cimahi Tengah</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiKec_9_CimahiUtara2.png" /></td><td>Cimahi Utara</td></tr></table>': layer_Batas_AdministrasiKec_9,'Batas_AdministrasiDesa<br /><table><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanBaros0.png" /></td><td>Kelurahan Baros</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanCibabat1.png" /></td><td>Kelurahan Cibabat</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanCibeber2.png" /></td><td>Kelurahan Cibeber</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanCibeureum3.png" /></td><td>Kelurahan Cibeureum</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanCigugurTengah4.png" /></td><td>Kelurahan Cigugur Tengah</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanCimahi5.png" /></td><td>Kelurahan Cimahi</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanCipageran6.png" /></td><td>Kelurahan Cipageran</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanCiteureup7.png" /></td><td>Kelurahan Citeureup</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanKarangMekar8.png" /></td><td>Kelurahan Karang Mekar</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanLeuwigajah9.png" /></td><td>Kelurahan Leuwigajah</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanMelong10.png" /></td><td>Kelurahan Melong</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanPadasuka11.png" /></td><td>Kelurahan Padasuka</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanPasirKaliki12.png" /></td><td>Kelurahan Pasir Kaliki</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanSetiamanah13.png" /></td><td>Kelurahan Setiamanah</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_AdministrasiDesa_8_KelurahanUtama14.png" /></td><td>Kelurahan Utama</td></tr></table>': layer_Batas_AdministrasiDesa_8,'Penggunaan_lahan<br /><table><tr><td style="text-align: center;"><img src="legend/Penggunaan_lahan_7_JalanArteriPrimer0.png" /></td><td>Jalan Arteri Primer</td></tr><tr><td style="text-align: center;"><img src="legend/Penggunaan_lahan_7_JalanTol1.png" /></td><td>Jalan Tol</td></tr><tr><td style="text-align: center;"><img src="legend/Penggunaan_lahan_7_Kolam2.png" /></td><td>Kolam</td></tr><tr><td style="text-align: center;"><img src="legend/Penggunaan_lahan_7_Lapangan3.png" /></td><td>Lapangan</td></tr><tr><td style="text-align: center;"><img src="legend/Penggunaan_lahan_7_PerkebunanKebun4.png" /></td><td>Perkebunan/Kebun</td></tr><tr><td style="text-align: center;"><img src="legend/Penggunaan_lahan_7_PermukimandanTempatKegiatan5.png" /></td><td>Permukiman dan Tempat Kegiatan</td></tr><tr><td style="text-align: center;"><img src="legend/Penggunaan_lahan_7_Sawah6.png" /></td><td>Sawah</td></tr><tr><td style="text-align: center;"><img src="legend/Penggunaan_lahan_7_SemakBelukar7.png" /></td><td>Semak Belukar</td></tr><tr><td style="text-align: center;"><img src="legend/Penggunaan_lahan_7_Situ8.png" /></td><td>Situ</td></tr><tr><td style="text-align: center;"><img src="legend/Penggunaan_lahan_7_TanahKosongGundul9.png" /></td><td>Tanah Kosong/Gundul</td></tr><tr><td style="text-align: center;"><img src="legend/Penggunaan_lahan_7_TegalanLadang10.png" /></td><td>Tegalan/Ladang</td></tr></table>': layer_Penggunaan_lahan_7,'Kontur<br /><table><tr><td style="text-align: center;"><img src="legend/Kontur_6_1000m0.png" /></td><td>1000 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_1010m1.png" /></td><td>1010 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_1020m2.png" /></td><td>1020 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_1030m3.png" /></td><td>1030 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_1040m4.png" /></td><td>1040 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_1050m5.png" /></td><td>1050 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_1060m6.png" /></td><td>1060 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_1070m7.png" /></td><td>1070 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_1080m8.png" /></td><td>1080 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_690m9.png" /></td><td>690 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_700m10.png" /></td><td>700 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_710m11.png" /></td><td>710 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_720m12.png" /></td><td>720 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_730m13.png" /></td><td>730 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_740m14.png" /></td><td>740 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_750m15.png" /></td><td>750 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_760m16.png" /></td><td>760 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_770m17.png" /></td><td>770 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_780m18.png" /></td><td>780 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_790m19.png" /></td><td>790 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_800m20.png" /></td><td>800 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_810m21.png" /></td><td>810 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_820m22.png" /></td><td>820 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_830m23.png" /></td><td>830 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_840m24.png" /></td><td>840 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_850m25.png" /></td><td>850 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_860m26.png" /></td><td>860 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_870m27.png" /></td><td>870 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_880m28.png" /></td><td>880 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_890m29.png" /></td><td>890 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_900m30.png" /></td><td>900 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_910m31.png" /></td><td>910 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_920m32.png" /></td><td>920 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_930m33.png" /></td><td>930 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_940m34.png" /></td><td>940 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_950m35.png" /></td><td>950 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_960m36.png" /></td><td>960 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_970m37.png" /></td><td>970 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_980m38.png" /></td><td>980 m</td></tr><tr><td style="text-align: center;"><img src="legend/Kontur_6_990m39.png" /></td><td>990 m</td></tr></table>': layer_Kontur_6,'Perairan_LN<br /><table><tr><td style="text-align: center;"><img src="legend/Perairan_LN_5_Bongkok0.png" /></td><td>Bongkok</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_LN_5_CiBaligo1.png" /></td><td>Ci Baligo</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_LN_5_CiBongkok2.png" /></td><td>Ci Bongkok</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_LN_5_CiGede3.png" /></td><td>Ci Gede</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_LN_5_CiKendal4.png" /></td><td>Ci Kendal</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_LN_5_CiLisung5.png" /></td><td>Ci Lisung</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_LN_5_CiMahi6.png" /></td><td>Ci Mahi</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_LN_5_CiMancong7.png" /></td><td>Ci Mancong</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_LN_5_CiPanas8.png" /></td><td>Ci Panas</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_LN_5_CiSangkan9.png" /></td><td>Ci Sangkan</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_LN_5_KaliWongso10.png" /></td><td>Kali Wongso</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_LN_5_SungaiMuara11.png" /></td><td>Sungai Muara</td></tr></table>': layer_Perairan_LN_5,'Perairan_AR<br /><table><tr><td style="text-align: center;"><img src="legend/Perairan_AR_4_Danau0.png" /></td><td>Danau</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_AR_4_Kolam1.png" /></td><td>Kolam</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_AR_4_Pekarangan2.png" /></td><td>Pekarangan</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_AR_4_Perkebunan3.png" /></td><td>Perkebunan</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_AR_4_Sungai4.png" /></td><td>Sungai</td></tr><tr><td style="text-align: center;"><img src="legend/Perairan_AR_4_TegalanLadang5.png" /></td><td>Tegalan/Ladang</td></tr></table>': layer_Perairan_AR_4,'Batas_DAS<br /><table><tr><td style="text-align: center;"><img src="legend/Batas_DAS_3_DasCibeureum0.png" /></td><td>Das Cibeureum</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_DAS_3_DasCibiuk1.png" /></td><td>Das Cibiuk</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_DAS_3_DasCihaur2.png" /></td><td>Das Cihaur</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_DAS_3_DasCilember3.png" /></td><td>Das Cilember</td></tr><tr><td style="text-align: center;"><img src="legend/Batas_DAS_3_DasCimahi4.png" /></td><td>Das Cimahi</td></tr></table>': layer_Batas_DAS_3,"OpenStreetMap": layer_OpenStreetMap_2,"Google Satelite": layer_GoogleSatelite_1,"Google Street": layer_GoogleStreet_0,}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_Batas_DAS_3.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['NAMA_OBJEK'] !== null?String('<div style="color: #000000; font-size: 8pt; font-weight: bold; font-family: \'Adobe Caslon Pro Bold\', sans-serif;">' + layer.feature.properties['NAMA_OBJEK']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Batas_DAS_3'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Perairan_AR_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['NAMA'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['NAMA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Perairan_AR_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Perairan_LN_5.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['NAMA'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['NAMA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Perairan_LN_5'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Kontur_6.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['KETINGGIAN'] !== null?String('<div style="color: #000000; font-size: 7pt; font-weight: bold; font-family: \'Adobe Caslon Pro Bold\', sans-serif;">' + layer.feature.properties['KETINGGIAN']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Kontur_6'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Batas_AdministrasiDesa_8.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['DESA'] !== null?String('<div style="color: #000000; font-size: 8pt; font-weight: bold; font-family: \'Adobe Caslon Pro Bold\', sans-serif;">' + layer.feature.properties['DESA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Batas_AdministrasiDesa_8'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Batas_AdministrasiKec_9.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['KECAMATAN'] !== null?String('<div style="color: #000000; font-size: 8pt; font-weight: bold; font-family: \'Adobe Caslon Pro Bold\', sans-serif;">' + layer.feature.properties['KECAMATAN']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Batas_AdministrasiKec_9'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_Batas_DAS_3,layer_Perairan_AR_4,layer_Perairan_LN_5,layer_Kontur_6,layer_Penggunaan_lahan_7,layer_Batas_AdministrasiDesa_8,layer_Batas_AdministrasiKec_9]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Batas_DAS_3,layer_Perairan_AR_4,layer_Perairan_LN_5,layer_Kontur_6,layer_Penggunaan_lahan_7,layer_Batas_AdministrasiDesa_8,layer_Batas_AdministrasiKec_9]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Batas_DAS_3,layer_Perairan_AR_4,layer_Perairan_LN_5,layer_Kontur_6,layer_Penggunaan_lahan_7,layer_Batas_AdministrasiDesa_8,layer_Batas_AdministrasiKec_9]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Batas_DAS_3,layer_Perairan_AR_4,layer_Perairan_LN_5,layer_Kontur_6,layer_Penggunaan_lahan_7,layer_Batas_AdministrasiDesa_8,layer_Batas_AdministrasiKec_9]);
+        });
+        </script>
+    </body>
+</html>
